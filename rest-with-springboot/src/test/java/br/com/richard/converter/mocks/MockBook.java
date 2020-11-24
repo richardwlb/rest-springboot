@@ -1,6 +1,7 @@
 package br.com.richard.converter.mocks;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -49,10 +50,12 @@ public class MockBook {
     private BookVO mockVO(Integer number) {
         BookVO book = new BookVO();
         // Date today = new Date(2018, 11, 31);
+        Calendar day = Calendar.getInstance();
+        day.set(2018, 11, 31);
 
     	book.setAuthor("Richard Brehmer" + number);
         book.setKey(number.longValue());
-        book.setLaunchDate(new Date(2021, 12, 31));
+        book.setLaunchDate(day);
         book.setPrice(299.00 + number);
         book.setTitle("Europe" + number);
 

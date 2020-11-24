@@ -1,6 +1,7 @@
 package br.com.richard.data.vo.v1;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -76,6 +77,9 @@ public class BookVO extends ResourceSupport implements Serializable {
     public int hashCode() {
         return Objects.hash(key, author, launchDate, price, title);
     }
+
+	public void setLaunchDate(Calendar day) {
+	}
 
     
 }
