@@ -1,15 +1,15 @@
 {
     "configurations": [
-        // {
-        //     "type": "java",
-        //     "name": "Spring Boot-Startup<rest-with-springboot>",
-        //     "request": "launch",
-        //     "cwd": "${workspaceFolder}",
-        //     "console": "internalConsole",
-        //     "mainClass": "br.com.erudio.Startup",
-        //     "projectName": "rest-with-springboot",
-        //     "args": ""
-        // },
+        {
+            "type": "java",
+            "name": "Spring Boot-Startup<rest-with-springboot>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "br.com.erudio.Startup",
+            "projectName": "rest-with-springboot",
+            "args": ""
+        },
         {
             "type": "java",
             "name": "Spring Boot-Startup<rest-with-springboot>",
