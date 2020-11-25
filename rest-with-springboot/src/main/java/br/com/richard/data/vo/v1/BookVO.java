@@ -77,9 +77,5 @@ public class BookVO extends ResourceSupport implements Serializable {
     public int hashCode() {
         return Objects.hash(key, author, launchDate, price, title);
     }
-
-	public void setLaunchDate(Calendar day) {
-	}
-
     
 }

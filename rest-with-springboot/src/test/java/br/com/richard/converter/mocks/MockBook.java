@@ -35,13 +35,13 @@ public class MockBook {
 
     private Book mockEntity(Integer number) {
         Book book = new Book();
-        Date today = new Date();
+        Date day = new Date(2008,01,01);
 
         book.setAuthor("Richard Brehmer" + number);
         book.setId(number.longValue());
-        book.setLaunchDate(today);
+        book.setLaunchDate(day);
         book.setPrice(299.00 + number);
-        book.setTitle("How to move to Miami" + number);
+        book.setTitle("Europe" + number);
 
         return book;
 
@@ -49,9 +49,7 @@ public class MockBook {
 
     private BookVO mockVO(Integer number) {
         BookVO book = new BookVO();
-        // Date today = new Date(2018, 11, 31);
-        Calendar day = Calendar.getInstance();
-        day.set(2018, 11, 31);
+        Date day = new Date(2018, 11, 31);
 
     	book.setAuthor("Richard Brehmer" + number);
         book.setKey(number.longValue());

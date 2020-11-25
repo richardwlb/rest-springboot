@@ -16,6 +16,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+
+    // Acesso padrão a documentação:
+    // http://localhost:8080/swagger-ui.html
+
+    // Para exportar pro postman:
+    // http://localhost:8080/v2/api-docs
     
     @Bean
     public Docket api() {

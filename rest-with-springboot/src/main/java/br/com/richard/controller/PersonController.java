@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import br.com.richard.services.PersonServices;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+// @CrossOrigin( origins = "http://localhost" ) // só aceita requisições do localhost.
 @Api(value="Person Endpoint", description = "Description for persons", tags = {"Person Endpoint"})
 @RestController
 @RequestMapping("/api/person/v1")
@@ -29,6 +31,7 @@ public class PersonController {
 	@Autowired
 	private PersonServices service;
 
+	@CrossOrigin( origins = "http://localhost" ) // só aceita requisições do localhost.
 	@ApiOperation(value="Find all people recorded")
 	@GetMapping( produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<PersonVO> findAll(){

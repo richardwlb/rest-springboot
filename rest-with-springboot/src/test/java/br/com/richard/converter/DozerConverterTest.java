@@ -36,14 +36,15 @@ public class DozerConverterTest {
 
         BookVO outputBook = DozerConverter.parseObject(inputObjectBook.mockEntity(), BookVO.class);
 
-        Calendar day = Calendar.getInstance();
-        day.set(2018, 11, 31);
+        Date day = new Date(2008,01,01);
+        // Calendar day = Calendar.getInstance();
+        // day.set(2018, 11, 31);
 
         Assert.assertEquals(Long.valueOf(0L), outputBook.getKey());
         Assert.assertEquals("Richard Brehmer0", outputBook.getAuthor());
         Assert.assertEquals(day, outputBook.getLaunchDate());
         // Assert.assertEquals( 299.00, outputBook.getPrice());
-        Assert.assertEquals("Europe", outputBook.getTitle());
+        Assert.assertEquals("Europe0", outputBook.getTitle());
     }
 
     @Test
