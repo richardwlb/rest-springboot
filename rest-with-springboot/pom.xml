@@ -28,13 +28,13 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 		<dependency>
@@ -109,18 +109,6 @@
           <artifactId>junit</artifactId>
 		</dependency>  
 
-  
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-      <version>2.1.10.RELEASE</version>
-    </dependency>
-  
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-      <version>2.1.10.RELEASE</version>
-    </dependency>
   </dependencies>
   
   <build>
@@ -152,8 +140,6 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
   		</plugins>
   </build>
-  
 </project>

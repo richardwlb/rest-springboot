@@ -23,21 +23,21 @@ import br.com.richard.security.jwt.JwtTokenProvider;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = "AuthenticationEndpoint")
+@Api(tags = "AuthenticationEndpoint") 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    
-    @Autowired
-    AuthenticationManager authenticationManager;
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
 
-    @Autowired
-    JwtTokenProvider tokenProvider;
-
-    @Autowired
-    UserRepository repository;
-
-    @ApiOperation(value = "Authenticates a user and returns a token")
+	@Autowired
+	JwtTokenProvider tokenProvider;
+	
+	@Autowired
+	UserRepository repository;
+	
+	@ApiOperation(value = "Authenticates a user and returns a token")
 	@SuppressWarnings("rawtypes")
 	@PostMapping(value = "/signin", produces = { "application/json", "application/xml", "application/x-yaml" }, 
 			consumes = { "application/json", "application/xml", "application/x-yaml" })
@@ -66,7 +66,4 @@ public class AuthController {
 			throw new BadCredentialsException("Invalid username/password supplied!");
 		}
 	}
-
-
-
 }

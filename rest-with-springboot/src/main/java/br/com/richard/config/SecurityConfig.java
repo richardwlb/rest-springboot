@@ -13,9 +13,9 @@ import br.com.richard.security.jwt.JwtConfigurer;
 import br.com.richard.security.jwt.JwtTokenProvider;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
-    @Autowired
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
 	private JwtTokenProvider tokenProvider;
 	
 	@Bean
