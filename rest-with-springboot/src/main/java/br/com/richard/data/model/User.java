@@ -49,25 +49,25 @@ public class User implements UserDetails, Serializable {
     @Column(name = "credentials_non_expired")
     private Boolean credentialsNonExpired;
 
-    @Column(name = "enable")
+    @Column(name = "enabled")
     private Boolean enabled;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_permission", joinColumns = { @JoinColumn (name = "id_user") },
-        inverseJoinColumns = { @JoinColumn (name = "id_permission") })
-    private List<Permission> permissions;
-
-    public List<String> getRoles(){
-        List<String> roles = new ArrayList<>();
-        for (Permission permission: this.permissions) {
-            roles.add(permission.getDescription());
-        }
-        return roles;
-    }
+	@JoinTable(name = "user_permission", joinColumns = { @JoinColumn (name = "id_user") },
+			inverseJoinColumns = { @JoinColumn (name = "id_permission")})
+	private List<Permission> permissions;
+	
+	public List<String> getRoles() {
+		List<String> roles = new ArrayList<>();
+		for (Permission permission : this.permissions) {
+			roles.add(permission.getDescription());
+		}
+		return roles;
+	}
 
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -75,7 +75,7 @@ public class User implements UserDetails, Serializable {
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public void setUserName(String userName) {
@@ -89,12 +89,9 @@ public class User implements UserDetails, Serializable {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    
     public Boolean getAccountNonExpired() {
-        return this.accountNonExpired;
+        return accountNonExpired;
     }
 
     public void setAccountNonExpired(Boolean accountNonExpired) {
@@ -102,7 +99,7 @@ public class User implements UserDetails, Serializable {
     }
 
     public Boolean getAccountNonLocked() {
-        return this.accountNonLocked;
+        return accountNonLocked;
     }
 
     public void setAccountNonLocked(Boolean accountNonLocked) {
@@ -110,7 +107,7 @@ public class User implements UserDetails, Serializable {
     }
 
     public Boolean getCredentialsNonExpired() {
-        return this.credentialsNonExpired;
+        return credentialsNonExpired;
     }
 
     public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
@@ -118,7 +115,7 @@ public class User implements UserDetails, Serializable {
     }
 
     public Boolean getEnabled() {
-        return this.enabled;
+        return enabled;
     }
 
     public void setEnabled(Boolean enabled) {
@@ -126,11 +123,15 @@ public class User implements UserDetails, Serializable {
     }
 
     public List<Permission> getPermissions() {
-        return this.permissions;
+        return permissions;
     }
 
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 
