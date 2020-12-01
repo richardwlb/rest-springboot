@@ -10,7 +10,7 @@ import com.github.dozermapper.core.Mapping;
 
 import org.springframework.hateoas.ResourceSupport;
 
-@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender"})
+@JsonPropertyOrder({"id", "address", "first_name", "last_name", "gender", "enabled"})
 public class PersonVO extends ResourceSupport implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -31,11 +31,13 @@ public class PersonVO extends ResourceSupport implements Serializable {
 
     @JsonProperty("last_name")
     private String lastName;
+
     private String address;
 
     @JsonIgnore
     private String gender;
 
+    private Boolean enabled;
     
 
     public String getFirstName() {
@@ -69,8 +71,18 @@ public class PersonVO extends ResourceSupport implements Serializable {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    
 
+    public Boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -80,12 +92,12 @@ public class PersonVO extends ResourceSupport implements Serializable {
             return false;
         }
         PersonVO personVO = (PersonVO) o;
-        return Objects.equals(key, personVO.key) && Objects.equals(firstName, personVO.firstName) && Objects.equals(lastName, personVO.lastName) && Objects.equals(address, personVO.address) && Objects.equals(gender, personVO.gender);
+        return Objects.equals(key, personVO.key) && Objects.equals(firstName, personVO.firstName) && Objects.equals(lastName, personVO.lastName) && Objects.equals(address, personVO.address) && Objects.equals(gender, personVO.gender) && Objects.equals(enabled, personVO.enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(key, firstName, lastName, address, gender);
+        return Objects.hash(key, firstName, lastName, address, gender, enabled);
     }
     
 

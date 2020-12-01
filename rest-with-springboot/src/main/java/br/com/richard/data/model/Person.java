@@ -32,6 +32,9 @@ public class Person implements Serializable {
     @Column(nullable = false, length = 6)
     private String gender;
 
+    @Column(nullable = false)
+    private Boolean enabled;
+
     public Person() {
         //
     }
@@ -101,6 +104,18 @@ public class Person implements Serializable {
         return this;
     }
 
+    public Boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -109,23 +124,12 @@ public class Person implements Serializable {
             return false;
         }
         Person person = (Person) o;
-        return Objects.equals(id, person.id) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(address, person.address) && Objects.equals(gender, person.gender);
+        return Objects.equals(enabled, person.enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, gender);
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", address='" + getAddress() + "'" +
-            ", gender='" + getGender() + "'" +
-            "}";
+        return Objects.hashCode(enabled);
     }
 
 }
