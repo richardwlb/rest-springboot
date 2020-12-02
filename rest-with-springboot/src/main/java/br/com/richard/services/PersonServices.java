@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.richard.converter.DozerConverter;
 import br.com.richard.data.model.Person;
@@ -46,6 +47,7 @@ public class PersonServices {
         return DozerConverter.parseObject(repository.save(entity), PersonVO.class) ;
     }
 
+    @Transactional
     public PersonVO disablePerson(long id){
         repository.disablePersons(id);
         var entity = repository.findById(id)
