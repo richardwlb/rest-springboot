@@ -5,11 +5,17 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,26 +43,56 @@ public class PersonController {
 	@Autowired
 	private PersonServices service;
 
+	@Autowired
+	private PagedResourcesAssembler<PersonVO> assembler;
+
 	@CrossOrigin( origins = "http://localhost" ) // só aceita requisições do localhost.
 	@ApiOperation(value="Find all people recorded")
 	@GetMapping( produces = { "application/json", "application/xml", "application/x-yaml" })
-	public List<PersonVO> findAll( 
+	public ResponseEntity<?> findAll( 
 			@RequestParam( value = "page", defaultValue = "0") int page,
 			@RequestParam( value = "limit", defaultValue = "10") int limit,
-			@RequestParam( value = "direction", defaultValue = "asc") String direction ){
+			@RequestParam( value = "direction", defaultValue = "asc") String direction){
 
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "firstName"));
 
-		List<PersonVO> persons = service.findAll(pageable);
+		Page<PersonVO> persons = service.findAll(pageable);
 		persons
 			.stream()
 			.forEach(p -> p.add(
 				linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()
 				)
 			);
-		return persons;
+
+		PagedResources<?> resources = assembler.toResource(persons);
+	
+		return new ResponseEntity<>(resources, HttpStatus.OK);
+	}
+
+	@ApiOperation(value="Find all people recorded with like firstName")
+	@GetMapping( value="/findPersonByName/{firstName}", produces = { "application/json", "application/xml", "application/x-yaml" })
+	public ResponseEntity<?> findPersonByName( 
+			@PathVariable("firstName") String firstName,
+			@RequestParam( value = "page", defaultValue = "0") int page,
+			@RequestParam( value = "limit", defaultValue = "10") int limit,
+			@RequestParam( value = "direction", defaultValue = "asc") String direction){
+
+		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
+
+		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "firstName"));
+
+		Page<PersonVO> persons = service.findPersonByName(firstName, pageable);
+		persons
+			.stream()
+			.forEach(p -> p.add(
+				linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()
+				)
+			);
+		PagedResources<?> resources = assembler.toResource(persons);
+	
+		return new ResponseEntity<>(resources, HttpStatus.OK);
 	}
 
 	@ApiOperation(value="Find one person")

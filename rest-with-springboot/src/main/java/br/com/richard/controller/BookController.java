@@ -3,9 +3,17 @@ package br.com.richard.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import java.util.List;
+// import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.richard.data.vo.v1.BookVO;
@@ -31,15 +40,24 @@ public class BookController {
 
     @ApiOperation(value = "Get all books")
     @GetMapping( produces = { "application/json", "application/xml", "application/x-yaml" })
-    public List<BookVO> findAll(){
-        List<BookVO> books = service.findAll();
+    public ResponseEntity<PagedResources<BookVO>> findAll( 
+        @RequestParam( value = "page", defaultValue = "0") int page,
+        @RequestParam( value = "limit", defaultValue = "10") int limit,
+        @RequestParam( value = "direction", defaultValue = "asc") String direction,
+        PagedResourcesAssembler assembler){
+
+        var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
+
+		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "title"));
+
+        Page<BookVO> books = service.findAll(pageable);
         books
             .stream()
             .forEach(p -> p.add(
                 linkTo(methodOn(BookController.class).findById(p.getKey())).withSelfRel() 
                 )
             );
-        return books;
+            return new ResponseEntity<>(assembler.toResource(books), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get one book")
