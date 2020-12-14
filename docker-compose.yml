@@ -6,7 +6,7 @@ services:
     restart: always
     build: 
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     environment: 
       TZ: America/Sao_Paulo
       MYSQL_ROOT_PASSWORD: docker
@@ -14,19 +14,19 @@ services:
       MYSQL_PASSWORD: docker
       MYSQL_DATABASE: rest_with_spring_boot_udemy
     ports: 
-      - "3308:3308"
+      - "3308:3306"
     networks: 
       - udemy-network
   rest-with-springboot-udemy:
     image: richardwlb/mysql-rest-with-springboot-udemy
     restart: always
-    build: ./RestWithSpringBootUdemy
-    working_dir: /RestWithSpringBootUdemy
+    build: ./rest-with-springboot
+    working_dir: /rest-with-springboot
     environment: 
       TZ: America/Sao_Paulo
       SPRING_BOOT_ENVIRONMENT: Production
     volumes: 
-      - ./RestWithSpringBootUdemy:/RestWithSpringBootUdemy
+      - ./rest-with-springboot:/rest-with-springboot
       - ~/.m2:/root/.m2
     ports: 
       - "8080:8080"
