@@ -1,8 +1,8 @@
 version: '3.4'
 services: 
   db:
-    # image: richardwlb/mysql-rest-with-springboot-udemy
-    image: mysql:5.7
+    image: richardwlb/mysql-rest-with-springboot-udemy
+    # image: mysql:5.7
     command: mysqld --default-authentication-plugin=mysql_native_password
     restart: always
     build: 
@@ -19,7 +19,7 @@ services:
     networks: 
       - udemy-network
   rest-with-springboot-udemy:
-    image: richardwlb/mysql-rest-with-springboot-udemy
+    image: richardwlb/rest-with-springboot-udemy
     restart: always
     build: ./rest-with-springboot
     working_dir: /rest-with-springboot
