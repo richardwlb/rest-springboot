@@ -10,7 +10,7 @@ deploy:
   provider: script
   script:
     docker push richardwlb/rest-with-springboot-udemy;
-    docker push richardwlb/mysql-rest-with-springboot-udemy;
+    # docker push richardwlb/mysql-rest-with-springboot-udemy;
   on:
     branch: master
   notifications:
