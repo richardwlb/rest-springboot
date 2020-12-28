@@ -35,7 +35,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfo(
-            "RESTFull API with Spring Boot",
+            "RESTFull API with Spring Boot 2.1.3 - Foo Bar",
             "Description about the API",
             "v1",
             "Terms of service url",

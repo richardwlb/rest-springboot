@@ -26,7 +26,7 @@ python:
 services: docker
 before_install:
   - sudo apt-get update
-  - cd 19\ RestWithSpringBootUdemy\ CI\ na\ AWS\ com\ o\ Travis\ CI/RestWithSpringBootUdemy/
+  - cd rest-with-springboot/
   - echo "Let's start Maven Package!"
   - mvn clean package
   - cd ..
@@ -39,8 +39,8 @@ before_deploy:
 deploy:
   provider: script
   script:
-    docker tag rest-with-spring-boot-udemy:latest leandrocgsi/rest-with-spring-boot-udemy:$TRAVIS_JOB_ID;
-    docker push leandrocgsi/rest-with-spring-boot-udemy:$TRAVIS_JOB_ID;
+    docker tag richardwlb/rest-with-springboot-udemy:latest richardwlb/rest-with-springboot-udemy:$TRAVIS_JOB_ID;
+    docker push richardwlb/rest-with-springboot-udemy:$TRAVIS_JOB_ID;
   on:
     branch: master
 after_success:
