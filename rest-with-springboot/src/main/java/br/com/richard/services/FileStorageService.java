@@ -35,7 +35,7 @@ public class FileStorageService {
     }
 
     public String storeFile(MultipartFile file){
-        // Limpa espacços e etc no nome do arquivo.
+        // Limpa espaços e etc no nome do arquivo.
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
