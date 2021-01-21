@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.richard.repository.UserRepository;
+import br.com.richard.security.AES;
 import br.com.richard.security.AccountCredentialsVO;
 import br.com.richard.security.jwt.JwtTokenProvider;
 import io.swagger.annotations.Api;
@@ -44,9 +45,13 @@ public class AuthController {
 	public ResponseEntity signin(@RequestBody AccountCredentialsVO data) {
 		try {
 			var username = data.getUsername();
-			var pasword = data.getPassword();
-			
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, pasword));
+      var password = data.getPassword();
+
+      // Decrypt the password
+      String decrypted = AES.decryptText(password, "segredoJava");
+      // System.out.println( "decrypted " + decrypted);
+
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, decrypted));
 			
 			var user = repository.findByUsername(username);
 			
